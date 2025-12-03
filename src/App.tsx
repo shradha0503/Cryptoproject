@@ -7,6 +7,15 @@ import { AuthProvider } from "@/contexts/AuthContext";
 import { ProtectedRoute } from "@/components/ProtectedRoute";
 import Index from "./pages/Index";
 import Login from "./pages/Login";
+import Wallet from "./pages/Wallet";
+import Deposit from "./pages/Deposit";
+import Withdraw from "./pages/Withdraw";
+import Transactions from "./pages/Transactions";
+import TransactionsPending from "./pages/TransactionsPending";
+import TransactionsCompleted from "./pages/TransactionsCompleted";
+import SettingsProfile from "./pages/SettingsProfile";
+import SettingsSecurity from "./pages/SettingsSecurity";
+import SettingsPreferences from "./pages/SettingsPreferences";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -28,7 +37,78 @@ const App = () => (
                 </ProtectedRoute>
               }
             />
-            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+            <Route
+              path="/wallet"
+              element={
+                <ProtectedRoute>
+                  <Wallet />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/wallet/deposit"
+              element={
+                <ProtectedRoute>
+                  <Deposit />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/wallet/withdraw"
+              element={
+                <ProtectedRoute>
+                  <Withdraw />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/transactions/all"
+              element={
+                <ProtectedRoute>
+                  <Transactions />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/transactions/pending"
+              element={
+                <ProtectedRoute>
+                  <TransactionsPending />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/transactions/completed"
+              element={
+                <ProtectedRoute>
+                  <TransactionsCompleted />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/settings/profile"
+              element={
+                <ProtectedRoute>
+                  <SettingsProfile />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/settings/security"
+              element={
+                <ProtectedRoute>
+                  <SettingsSecurity />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/settings/preferences"
+              element={
+                <ProtectedRoute>
+                  <SettingsPreferences />
+                </ProtectedRoute>
+              }
+            />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </AuthProvider>

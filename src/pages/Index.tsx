@@ -5,22 +5,19 @@ import { AIPromo } from "@/components/AIPromo";
 import { FAQ } from "@/components/FAQ";
 import { Footer } from "@/components/Footer";
 import { AIAssistant } from "@/components/AIAssistant";
-import { Header } from "@/components/Header";
+import { DashboardLayout } from "@/components/DashboardLayout";
 
 const Index = () => {
   return (
-    <div className="min-h-screen">
-      <Header />
-      <div className="pt-16">
-        <Hero />
-        <Features />
-        <HowItWorks />
-        <AIPromo />
-        <FAQ />
-        <Footer />
-        <AIAssistant />
-      </div>
-    </div>
+    <DashboardLayout>
+      <Hero />
+      <Features />
+      <HowItWorks />
+      <AIPromo />
+      <FAQ />
+      <Footer />
+      <AIAssistant />
+    </DashboardLayout>
   );
 };
 
