@@ -5,17 +5,12 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "@/contexts/AuthContext";
 import { ProtectedRoute } from "@/components/ProtectedRoute";
-import Index from "./pages/Index";
+import { MainLayout } from "@/components/MainLayout";
 import Login from "./pages/Login";
+import Home from "./pages/Home";
 import Wallet from "./pages/Wallet";
-import Deposit from "./pages/Deposit";
-import Withdraw from "./pages/Withdraw";
-import Transactions from "./pages/Transactions";
-import TransactionsPending from "./pages/TransactionsPending";
-import TransactionsCompleted from "./pages/TransactionsCompleted";
-import SettingsProfile from "./pages/SettingsProfile";
-import SettingsSecurity from "./pages/SettingsSecurity";
-import SettingsPreferences from "./pages/SettingsPreferences";
+import Swap from "./pages/Swap";
+import Profile from "./pages/Profile";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -33,7 +28,9 @@ const App = () => (
               path="/"
               element={
                 <ProtectedRoute>
-                  <Index />
+                  <MainLayout>
+                    <Home />
+                  </MainLayout>
                 </ProtectedRoute>
               }
             />
@@ -41,71 +38,29 @@ const App = () => (
               path="/wallet"
               element={
                 <ProtectedRoute>
-                  <Wallet />
+                  <MainLayout>
+                    <Wallet />
+                  </MainLayout>
                 </ProtectedRoute>
               }
             />
             <Route
-              path="/wallet/deposit"
+              path="/swap"
               element={
                 <ProtectedRoute>
-                  <Deposit />
+                  <MainLayout>
+                    <Swap />
+                  </MainLayout>
                 </ProtectedRoute>
               }
             />
             <Route
-              path="/wallet/withdraw"
+              path="/profile"
               element={
                 <ProtectedRoute>
-                  <Withdraw />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/transactions/all"
-              element={
-                <ProtectedRoute>
-                  <Transactions />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/transactions/pending"
-              element={
-                <ProtectedRoute>
-                  <TransactionsPending />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/transactions/completed"
-              element={
-                <ProtectedRoute>
-                  <TransactionsCompleted />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/settings/profile"
-              element={
-                <ProtectedRoute>
-                  <SettingsProfile />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/settings/security"
-              element={
-                <ProtectedRoute>
-                  <SettingsSecurity />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/settings/preferences"
-              element={
-                <ProtectedRoute>
-                  <SettingsPreferences />
+                  <MainLayout>
+                    <Profile />
+                  </MainLayout>
                 </ProtectedRoute>
               }
             />
