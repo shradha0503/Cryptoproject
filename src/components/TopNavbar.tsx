@@ -1,74 +1,20 @@
-import { useNavigate } from 'react-router-dom';
-import { Button } from '@/components/ui/button';
-import { User, Menu } from 'lucide-react';
-import { useState } from 'react';
+import { Link } from "react-router-dom";
+import { User, Menu } from "lucide-react";
 
-interface TopNavbarProps {
-  onMenuClick?: () => void;
-}
-
-export const TopNavbar = ({ onMenuClick }: TopNavbarProps) => {
-  const navigate = useNavigate();
-  const [isProfileOpen, setIsProfileOpen] = useState(false);
-
+export default function TopNavbar() {
   return (
-    <nav className="sticky top-0 z-40 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="h-16 px-4 flex items-center justify-between">
-        <div className="flex items-center gap-4">
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={onMenuClick}
-            className="lg:hidden"
-          >
-            <Menu className="h-5 w-5" />
-          </Button>
+    <header className="fixed top-0 left-0 w-full h-16 backdrop-blur-xl bg-white/30 dark:bg-black/30 shadow-sm border-b border-white/20 z-50 flex items-center justify-between px-4">
+      <h1 className="text-xl font-bold bg-gradient-to-r from-blue-500 to-purple-500 text-transparent bg-clip-text">
+        CryptoX Wallet
+      </h1>
 
-          <button
-            onClick={() => navigate('/')}
-            className="flex items-center gap-2 group"
-          >
-            <div className="p-2 rounded-lg bg-gradient-primary group-hover:shadow-glow transition-all">
-              <span className="text-xl font-bold text-white">C</span>
-            </div>
-            <span className="text-lg font-bold gradient-text hidden sm:inline">CryptoSwap</span>
-          </button>
-        </div>
+      <div className="flex items-center gap-4">
+        <Link to="/profile">
+          <User className="w-6 h-6 text-gray-700 dark:text-gray-200 hover:scale-110 transition" />
+        </Link>
 
-        <div className="flex items-center gap-3">
-          <div className="relative">
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={() => setIsProfileOpen(!isProfileOpen)}
-              className="rounded-full"
-            >
-              <User className="h-5 w-5" />
-            </Button>
-
-            {isProfileOpen && (
-              <div className="absolute right-0 mt-2 w-48 bg-background border border-border rounded-lg shadow-lg py-2">
-                <button
-                  onClick={() => {
-                    navigate('/profile');
-                    setIsProfileOpen(false);
-                  }}
-                  className="w-full text-left px-4 py-2 hover:bg-primary/10 transition-colors"
-                >
-                  Profile Settings
-                </button>
-                <hr className="my-2 border-border/30" />
-                <button
-                  onClick={() => setIsProfileOpen(false)}
-                  className="w-full text-left px-4 py-2 hover:bg-primary/10 transition-colors text-red-500"
-                >
-                  Sign Out
-                </button>
-              </div>
-            )}
-          </div>
-        </div>
+        <Menu className="w-6 h-6 text-gray-700 dark:text-gray-200 md:hidden" />
       </div>
-    </nav>
+    </header>
   );
-};
+}

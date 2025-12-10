@@ -1,49 +1,33 @@
-import { useLocation, useNavigate } from 'react-router-dom';
-import { Home, Wallet, ArrowUpRight, User } from 'lucide-react';
-import { cn } from '@/lib/utils';
+import { NavLink } from "react-router-dom";
+import { Home, Wallet, RefreshCcw, User } from "lucide-react";
 
-export const BottomNav = () => {
-  const location = useLocation();
-  const navigate = useNavigate();
-
-  const navItems = [
-    { label: 'Home', icon: Home, path: '/' },
-    { label: 'Wallet', icon: Wallet, path: '/wallet' },
-    { label: 'Swap', icon: ArrowUpRight, path: '/swap' },
-    { label: 'Profile', icon: User, path: '/profile' },
+export default function BottomNav() {
+  const tabs = [
+    { to: "/", icon: Home, label: "Home" },
+    { to: "/wallet", icon: Wallet, label: "Wallet" },
+    { to: "/swap", icon: RefreshCcw, label: "Swap" },
+    { to: "/profile", icon: User, label: "Profile" },
   ];
 
-  const isActive = (path: string) => location.pathname === path;
-
   return (
-    <nav className="fixed bottom-0 left-0 right-0 bg-background border-t border-border/40 lg:hidden">
-      <div className="flex items-center justify-around h-20">
-        {navItems.map((item) => {
-          const Icon = item.icon;
-          const active = isActive(item.path);
-
-          return (
-            <button
-              key={item.path}
-              onClick={() => navigate(item.path)}
-              className={cn(
-                'flex flex-col items-center justify-center w-full h-full gap-1 transition-all duration-200',
-                active
-                  ? 'text-primary'
-                  : 'text-muted-foreground hover:text-primary'
-              )}
-            >
-              <Icon className={cn('h-6 w-6', active && 'text-gradient-primary')} />
-              <span className={cn(
-                'text-xs font-medium',
-                active && 'text-primary'
-              )}>
-                {item.label}
-              </span>
-            </button>
-          );
-        })}
-      </div>
+    <nav className="fixed bottom-0 left-0 w-full h-20 bg-white/30 dark:bg-black/30 backdrop-blur-xl
+                    border-t border-white/20 shadow-xl md:hidden flex items-center justify-around z-50">
+      {tabs.map((tab) => {
+        const Icon = tab.icon;
+        return (
+          <NavLink
+            key={tab.to}
+            to={tab.to}
+            className={({ isActive }) =>
+              `flex flex-col items-center gap-1 text-xs transition
+              ${isActive ? "text-blue-600 font-semibold" : "text-gray-600 dark:text-gray-300"}`
+            }
+          >
+            <Icon className="w-6 h-6" />
+            {tab.label}
+          </NavLink>
+        );
+      })}
     </nav>
   );
-};
+}

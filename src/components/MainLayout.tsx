@@ -1,26 +1,17 @@
-import { useState } from 'react';
-import { TopNavbar } from '@/components/TopNavbar';
-import { Sidebar } from '@/components/Sidebar';
-import { BottomNav } from '@/components/BottomNav';
+import TopNavbar from "./TopNavbar";
+import Sidebar from "./Sidebar";
+import BottomNav from "./BottomNav";
 
-interface MainLayoutProps {
-  children: React.ReactNode;
-}
-
-export const MainLayout = ({ children }: MainLayoutProps) => {
-  const [sidebarOpen, setSidebarOpen] = useState(false);
-
+export const MainLayout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <div className="min-h-screen bg-background">
-      <TopNavbar onMenuClick={() => setSidebarOpen(!sidebarOpen)} />
+    <div className="min-h-screen bg-gray-50 dark:bg-black text-gray-900 dark:text-gray-100">
+      <TopNavbar />
 
       <div className="flex">
-        <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
+        <Sidebar />
 
-        <main className="flex-1 lg:ml-0">
-          <div className="pb-20 lg:pb-0">
-            {children}
-          </div>
+        <main className="flex-1 pt-20 md:pl-64 p-4 pb-24">
+          {children}
         </main>
       </div>
 
